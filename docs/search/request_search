@@ -1,0 +1,10 @@
+Curl
+
+curl -X 'GET' \
+  'http://127.0.0.1:8000/api/v1/search?name=Matrix&systemCode=b' \
+  -H 'accept: application/json'
+
+
+Request URL
+
+http://127.0.0.1:8000/api/v1/search?name=Matrix&systemCode=b

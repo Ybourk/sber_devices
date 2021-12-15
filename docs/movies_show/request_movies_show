@@ -1,0 +1,8 @@
+Curl
+
+curl -X 'GET' \
+  'http://127.0.0.1:8000/api/v1/movies/show?movieId=5e9c7341-938c-47c6-a267-ca1cdc880e7c&systemCode=b' \
+  -H 'accept: application/json'
+
+Request URL
+http://127.0.0.1:8000/api/v1/movies/show?movieId=5e9c7341-938c-47c6-a267-ca1cdc880e7c&systemCode=b

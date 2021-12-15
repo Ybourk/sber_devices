@@ -1,0 +1,164 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "Тело сообщения",
+  "description": "Тело сообщения, в котором содержатся найденные фильмы по ключевому слову.",
+  "default": {},
+  "examples": [
+    {
+      "systemCode": "CINEMA",
+      "messageId": "ed9a3fc5-07a7-4c45-bbc4-5b9c79511404",
+      "created": "2021-12-14T12:33:40.700",
+      "movies": [
+        {
+          "id": "224f72ef-dd74-4c8c-9179-6d1e5c58ec5f",
+          "name": "Matrix",
+          "genre": "fantastic",
+          "description": "Классика киберпанка",
+          "rating": 9
+        }
+      ]
+    }
+  ],
+  "required": [
+    "systemCode",
+    "messageId",
+    "created",
+    "movies"
+  ],
+  "properties": {
+    "systemCode": {
+      "$id": "#/properties/systemCode",
+      "type": "string",
+      "title": "Код системы",
+      "description": "Код системы, которая отправила сообщение",
+      "default": "",
+      "examples": [
+        "CINEMA"
+      ]
+    },
+    "messageId": {
+      "$id": "#/properties/messageId",
+      "type": "string",
+      "title": "id сообщения",
+      "description": "id сообщения",
+      "default": "",
+      "examples": [
+        "ed9a3fc5-07a7-4c45-bbc4-5b9c79511404"
+      ]
+    },
+    "created": {
+      "$id": "#/properties/created",
+      "type": "string",
+      "format": "datetime",
+      "title": "Дата и время отправки сообщения",
+      "description": "Дата и время отправки сообщения",
+      "default": "",
+      "examples": [
+        "2021-12-14T12:33:40.700"
+      ]
+    },
+    "movies": {
+      "$id": "#/properties/movies",
+      "type": "array",
+      "title": "Список фильмов",
+      "description": "Список фильмов, полученных по ключевому слову",
+      "default": [],
+      "examples": [
+        [
+          {
+            "id": "224f72ef-dd74-4c8c-9179-6d1e5c58ec5f",
+            "name": "Matrix",
+            "genre": "fantastic",
+            "description": "Классика киберпанка",
+            "rating": 9
+          }
+        ]
+      ],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/movies/items",
+        "anyOf": [
+          {
+            "$id": "#/properties/movies/items/anyOf/0",
+            "type": "object",
+            "title": "Тело фильма",
+            "description": "Детальная информация о фильме",
+            "default": {},
+            "examples": [
+              {
+                "id": "224f72ef-dd74-4c8c-9179-6d1e5c58ec5f",
+                "name": "Matrix",
+                "genre": "fantastic",
+                "description": "Классика киберпанка",
+                "rating": 9
+              }
+            ],
+            "required": [
+              "id",
+              "name",
+              "genre"
+            ],
+            "properties": {
+              "id": {
+                "$id": "#/properties/movies/items/anyOf/0/properties/id",
+                "type": "string",
+                "title": "id фильма",
+                "description": "id фильма, полученный по ключевому слову",
+                "default": "",
+                "examples": [
+                  "224f72ef-dd74-4c8c-9179-6d1e5c58ec5f"
+                ]
+              },
+              "name": {
+                "$id": "#/properties/movies/items/anyOf/0/properties/name",
+                "type": "string",
+                "title": "название фильма",
+                "description": "название фильма, полученное по ключевому слову",
+                "default": "",
+                "examples": [
+                  "Matrix"
+                ]
+              },
+              "genre": {
+                "$id": "#/properties/movies/items/anyOf/0/properties/genre",
+                "type": "string",
+                "title": "жанр фильма",
+                "description": "жанр фильма, полученный по ключевому слову",
+                "default": "",
+                "examples": [
+                  "fantastic"
+                ]
+              },
+              "description": {
+                "$id": "#/properties/movies/items/anyOf/0/properties/description",
+                "type": "string",
+                "title": "описание фильма",
+                "description": "описание фильма, полученное по ключевому слову",
+                "default": null,
+                "examples": [
+                  "Классика киберпанка"
+                ]
+              },
+              "rating": {
+                "$id": "#/properties/movies/items/anyOf/0/properties/rating",
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10,
+                "title": "рейтинг фильма",
+                "description": "рейтинг фильма, полученный по ключевому слову",
+                "default": null,
+                "examples": [
+                  9
+                ]
+              }
+            },
+            "additionalProperties": true
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": true
+}
