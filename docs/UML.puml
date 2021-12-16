@@ -1,0 +1,76 @@
+@startuml
+
+actor "A" as front
+
+    box "Message Brocker" #LightGreen
+        participant "Kafka" as kafka
+    end box
+
+    box "Microservice" #LightBlue
+        participant "B-Api" as b
+    end box
+
+    box "External Partner"
+        participant "Cinema-Api" as cinema
+    end box
+
+
+group Поиск фильмов по названию
+    activate front
+        front ->> kafka:подписка на топик /MOVIESNAME
+            activate kafka
+                activate b
+                    b ->> kafka: подписка на топик /MOVIESNAME
+        front ->> kafka: producer: /name {name}
+                    b ->> kafka: consumer: {name}
+
+
+    activate b
+        b -> cinema:GET http://[host]/api/v1/search?name={name}&systemCode=B
+            activate cinema
+                cinema --> b: 200 ok: movies[]
+            deactivate cinema
+
+    activate b
+        b -> b: Сформировать ответ
+    deactivate b
+        deactivate b
+
+                    b ->> kafka: producer: movies[]
+front ->> kafka: consumer: movies[]
+                deactivate b
+            deactivate kafka
+    deactivate front
+end
+
+
+group Получение детальной информации по фильму
+
+    activate front
+        front ->> kafka:подписка на топик /MOVIESNAME
+            activate kafka
+                activate b
+                    b ->> kafka: подписка на топик /MOVIESNAME
+        front ->> kafka: producer: /movieInfo {movieId}
+                    b ->> kafka: consumer: {movieId}
+
+
+    activate b
+        b -> cinema:GET http://[host]/api/v1/movies/show?movieId={UUID}&systemCode=B
+            activate cinema
+                cinema --> b: 200 ok: moviesInfo{}
+            deactivate cinema
+
+    activate b
+        b -> b: Сформировать ответ
+    deactivate b
+        deactivate b
+
+                    b ->> kafka: producer: movies[]
+front ->> kafka: consumer: moviesInfo
+                deactivate b
+            deactivate kafka
+    deactivate front
+end
+
+@enduml

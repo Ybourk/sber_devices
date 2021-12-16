@@ -1,0 +1,38 @@
+request
+Система А:
+1) подписывается на топик /MOVIESNAME
+2) отправляет команду /name в json передает обязательный параметр "name" - название фильма
+
+response
+{
+    "MOVIESNAME": [
+        {
+            "systemCode": "B",
+            "messageId": "ed9a3fc5-07a7-4c45-bbc4-5b9c79511404",
+            "created": "2021-12-14T12:38:50.600",
+            "movies": [
+                {
+                    "id": "224f72ef-dd74-4c8c-9179-6d1e5c58ec5f",
+                    "name": "Matrix",
+                    "genre": "fantastic",
+                    "description": "Классика киберпанка",
+                    "rating": 9
+                },
+                {
+                    "id": "83e72046-b544-4cb4-8fcb-77013fcab4d2",
+                    "name": "Matrix 2",
+                    "genre": "fantastic",
+                    "description": "",
+                    "rating": 7
+                },
+                {
+                    "id": "fed6d625-8fef-4f6c-9aad-fc0141bc2f21",
+                    "name": "Matrix 3",
+                    "genre": "fantastic",
+                    "description": "",
+                    "rating": 4
+                }
+            ]
+        }
+    ]
+}

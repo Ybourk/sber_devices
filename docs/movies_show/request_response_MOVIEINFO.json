@@ -1,0 +1,23 @@
+request
+Система А:
+1) подписывается на топик /MOVIEINFO
+2) отправляет команду /movieInfo, в json передает обязательный параметр "movieId" - id фильма
+
+
+{
+    "MOVIEINFO": [
+        {
+            "systemCode": "CINEMA",
+            "messageId": "cfb23892-27ee-11eb-a52a-ac100f6e0000",
+            "created": "2021-12-14T15:43:50.700",
+            "movie": {
+                "id": "224f72ef-dd74-4c8c-9179-6d1e5c58ec5f",
+                "name": "Matrix",
+                "genre": "fantastic",
+                "description": "Классика киберпанка",
+                "rating": "9",
+                "link": "https://cinema/matrix.html"
+            }
+        }
+    ]
+}
